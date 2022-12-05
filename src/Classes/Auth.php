@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Classes;
 
-class Auth
+require_once 'Interfaces/CustomerAuthenticable.php';
+use CustomerAuthenticable;
+
+class Auth implements CustomerAuthenticable
 {
     /**
      * Make authentication
@@ -14,7 +17,7 @@ class Auth
      */
     public function authenticate($credentials)
     {
-        return true;
+        return $this->checkUserAge($credentials);
     }
 
     /**

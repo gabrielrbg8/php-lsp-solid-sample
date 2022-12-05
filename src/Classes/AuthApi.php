@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Classes;
 
-use Exception;
+require_once 'Interfaces/Authenticable.php';
 
-class AuthApi extends Auth
+use Authenticable;
+
+class AuthApi implements Authenticable
 {
     /**
      * Make authentication
@@ -16,20 +18,6 @@ class AuthApi extends Auth
      */
     public function authenticate($credentials)
     {
-        $this->checkUserAge($credentials);
-        return ['auth' => true, 'status' => 201];
-    }
-
-    /**
-     * Check if user is adult
-     * 
-     * @param mixed $credentials
-     * @return void
-     */
-    public function checkUserAge($credentials)
-    {
-        if (isset($credentials['age'])) {
-            throw new Exception('Auth API dont has age', 422);
-        }
+        return true;
     }
 }
